@@ -36,7 +36,9 @@ class User
       
       user.login = data["nickname"]
       user.login = data["name"] if provider == "google"
-      user.login.gsub!(/[^\w]/, "_")
+      
+      # user.login.gsub!(/[^\w]/, "_")
+      user.login = user.login.gsub!(/[^\w]/, "_")
       if User.where(:login => user.login).count > 0 || user.login.blank?
         user.login = "u#{Time.now.to_i}"
       end
